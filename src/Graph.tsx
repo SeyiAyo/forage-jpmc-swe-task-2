@@ -62,6 +62,9 @@ class Graph extends Component<IProps, {}> {
         top_bid_price: 'avg',
         timestamp: 'distinct count',
       })); // Set the aggregate functions for the columns
+
+      // Load initial empty data to display the table structure
+      this.table.update([]);
     }
   }
 
