@@ -25,7 +25,7 @@ class App extends Component<{}, IState> {
       // We use this state to parse data down to the child element (Graph) as element property
       data: [], // Initialize data as an empty array
       intervalId: null, // Initialize intervalId as null
-      showGraph: false, // Initialize showGraph to false, hiding the graph initially
+      showGraph: true, // Initialize showGraph to true to show the graph initially
     };
   }
 
@@ -33,20 +33,13 @@ class App extends Component<{}, IState> {
    * Render Graph react component with state.data parse as property data
    */
   renderGraph() {
-    // Only render the graph if showGraph is true
-    if (this.state.showGraph) {
-      return (<Graph data={this.state.data}/>);
-    }
-    return null; // Otherwise, render nothing
+    return (<Graph data={this.state.data} />);
   }
 
   /**
    * Get new data from server and update the state with the new data
    */
   getDataFromServer() {
-    // Set the state to show the graph
-    this.setState({ showGraph: true });
-
     // Set an interval to repeatedly request data every 100ms
     const intervalId = setInterval(() => {
       DataStreamer.getData((serverResponds: ServerRespond[]) => {
@@ -84,7 +77,7 @@ class App extends Component<{}, IState> {
             // As part of your task, update the getDataFromServer() function
             // to keep requesting the data every 100ms until the app is closed
             // or the server does not return anymore data.
-            onClick={() => {this.getDataFromServer()}}>
+            onClick={() => { this.getDataFromServer() }}>
             Start Streaming Data
           </button>
           <div className="Graph">
